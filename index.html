@@ -1,86 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My baby</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Declaração</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f8f8f8; /* Light pastel pink */
+      font-family: 'Montserrat', sans-serif; /* Using Montserrat font */
+      margin: 0;
+    }
 
-    <style>
-        body{
-            background-color: red;
-        }
+    .container {
+      text-align: center;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        .painel{
-            margin: auto;
-            background-color: white;
-            width: 500px;
-            height: 500px;
-            border-radius: 20px;
-            text-align: center;
-            padding-top: 50px;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        }
-        #sim{
-            height: 40px;
-            width: 60px;
-            background-color: red;
-            border: 2px solid white;
-            border-radius: 10px;
-            color: white;
-            margin-left: -50px;
-        }
-        #nao{
-            position: absolute;
-            height: 40px;
-            width: 60px;
-            background-color: red;
-            border: 2px solid white;
-            border-radius: 10px;
-            color: white;
-            margin-left: 10px;
-        }
+    .foto {
+      max-width: 300px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
 
-    </style>
+    h1 {
+      color: #ff69b4; /* Light pink */
+      font-size: 2.5rem; /* Slightly larger font size */
+      margin-bottom: 15px;
+    }
 
+    h2 {
+      color: #333;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      position: relative; /* Important for positioning the "Não" button */
+      
+    }
+
+    .button {
+      background-color: #ff69b4; /* Light pink */
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background-color: #ff1493; /* Hot pink */
+    }
+
+    #no {
+      cursor: default;
+      position: absolute; /* Makes the "Não" button moveable */
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .fade-out {
+      animation: fadeOut 2s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <div class="painel">
-        <h1>Zoe</h1>
-
-        <img src="https://gifman.net/wp-content/uploads/2019/06/ursinho-fofo-apaixonado.gif" alt="">
-
-        <h2> Akzeptierst du, mit mir auszugehen? </h2>
-        
-
-        <a href="https://www.youtube.com/watch?v=izGwDsrQ1eQ"><button id="sim" > Ja! </button></a>
-        <button onmouseover="fuja()" id="nao"> Nein! </button>
-        
+  <div class="container">
+    <img src="Imagem do WhatsApp de 2025-01-28 à(s) 01.20.03_a67b7550.jpg" alt="Foto da minha amada" class="foto">
+    <h1>Maria Eduarda</h1>
+    <h2>Você aceita namorar comigo?</h2>
+    <p>Proposta Irrecusável (Literalmente)</p>
+    <div class="buttons">
+      <button class="button" id="yes">Sim</button>
+      <button class="button" id="no">Não</button>
     </div>
+  </div>
 
-    <script>
-        function fuja(){
-            var botaoNao = document.getElementById("nao")
+  <script>
+    const noButton = document.getElementById('no');
+    const yesButton = document.getElementById('yes');
+    const container = document.querySelector('.container');
+    const buttonsDiv = document.querySelector('.buttons');
 
-            var larguraJanela = window.innerWidth;
-            var alturaJanela = window.innerHeight;
+    // Efeito para o botão "Não"
+    noButton.addEventListener('mouseenter', () => {
+      const containerRect = container.getBoundingClientRect();
+      const newX = Math.random() * (window.innerWidth - containerRect.width - 150); // Ajustado para o tamanho do botão
+      const newY = Math.random() * (window.innerHeight - containerRect.height - 50); // Ajustado para o tamanho do botão
 
-            var maxX = larguraJanela - botaoNao.offsetWidth;
-            var maxY = alturaJanela - botaoNao.offsetHeight;
+      noButton.style.left = `${newX}px`;
+      noButton.style.top = `${newY}px`;
+    });
 
-            var aleatorioX = Math.floor(Math.random() * maxX);
-            var aleatorioY = Math.floor(Math.random() * maxY);
+    // Quando o botão "Sim" for clicado
+    yesButton.addEventListener('click', () => {
+      alert('Eu sabia que você diria sim! 💖');
 
-            botaoNao.style.left = aleatorioX + "px";
-            botaoNao.style.top = aleatorioY + "px";
+      // Aplica o efeito de fade nos botões
+      buttonsDiv.classList.add('fade-out');
 
-
-        }
-    </script>
-
-
-
-    
+      // Após 2 segundos (duração da animação), redireciona para o vídeo do YouTube
+      setTimeout(() => {
+        window.location.href = 'https://www.youtube.com/watch?v=0bGuTy1fWHw';
+      }, 2000); // Tempo em milissegundos (2 segundos)
+    });
+  </script>
 </body>
 </html>
